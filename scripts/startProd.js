@@ -9,7 +9,7 @@ const { app } = require('../build/server');
 const PORT = process.env.PORT || 3000;
 
 // Use the native Node.js cluster module to create a worker processes for each CPU
-if (cluster.isMaster) {
+/*if (cluster.isMaster) {
   console.log(`Master pid: ${process.pid}`);
 
   const cpuCount = require('os').cpus().length;
@@ -20,7 +20,7 @@ if (cluster.isMaster) {
   cluster.on('exit', worker => {
     console.log(`Worker ${worker.process.pid} died`);
   });
-} else {
+} else {*/
   app.listen(PORT, err => {
     if (err) {
       return console.error(err);
@@ -32,4 +32,4 @@ if (cluster.isMaster) {
       }`
     );
   });
-}
+//}
