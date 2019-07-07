@@ -27,9 +27,7 @@ const PORT = process.env.PORT || 3000;
     }
 
     console.info(
-      `Server running on port ${PORT} -- Worker pid: ${
-        cluster.worker.process.pid
-      }`
+      `Server running on port ${PORT}`
     );
   });
 //}
