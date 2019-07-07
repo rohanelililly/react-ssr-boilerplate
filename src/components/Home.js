@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { api } from '../api';
 import { useServerData } from '../state/serverDataContext';
+import Button from 'react-bootstrap/Button';
 
 const Home = () => {
   const serverTodos = useServerData(data => {
@@ -11,8 +12,10 @@ const Home = () => {
   const [todos, setTodos] = useState(serverTodos);
 
   return (
-    <div>
+    <div className="container">
       <h1>Home page</h1>
+      <Button variant="outline-primary">Primary</Button>
+  <Button variant="outline-secondary">Secondary</Button>
 
       <form
         onSubmit={e => {

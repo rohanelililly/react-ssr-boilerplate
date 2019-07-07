@@ -10,6 +10,7 @@ import { fetchDataForRender } from './fetchDataForRender';
 import { indexHtml } from './indexHtml';
 import stats from '../build/react-loadable.json';
 import { ServerDataProvider } from '../src/state/serverDataContext';
+import { log } from 'util';
 
 const ServerApp = ({ context, data, location }) => {
   return (
@@ -22,6 +23,7 @@ const ServerApp = ({ context, data, location }) => {
 };
 
 export const renderServerSideApp = (req, res) => {
+  console.log(req.headers['user-agent'])
   Loadable.preloadAll()
     .then(() => fetchDataForRender(ServerApp, req))
     .then(data => renderApp(ServerApp, data, req, res));
@@ -30,6 +32,8 @@ export const renderServerSideApp = (req, res) => {
 function renderApp(ServerApp, data, req, res) {
   const context = {};
   const modules = [];
+  console.log(data)
+  data={...data ,...{agent:req.headers['user-agent']}}
 
   const markup = ReactDOMServer.renderToString(
     <Loadable.Capture report={moduleName => modules.push(moduleName)}>

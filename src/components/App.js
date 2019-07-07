@@ -19,7 +19,7 @@ const LoadableAbout = Loadable({
   }
 });
 
-const App = () => (
+const App = (props) => (
   <div className="app">
     <Helmet
       title={metadata.title}

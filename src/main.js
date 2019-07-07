@@ -9,13 +9,14 @@ import { ServerDataProvider } from './state/serverDataContext';
 import './styles/index.scss';
 
 const serverData = window.__SERVER_DATA__;
+delete window.__SERVER_DATA__;
 
 export const main = () => {
   Loadable.preloadReady().then(() => {
     ReactDOM.hydrate(
       <ServerDataProvider value={serverData}>
         <BrowserRouter>
-          <App />
+          <App value={serverData.agent}/>
         </BrowserRouter>
       </ServerDataProvider>,
       document.getElementById('root')
