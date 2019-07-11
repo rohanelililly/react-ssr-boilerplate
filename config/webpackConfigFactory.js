@@ -81,6 +81,12 @@ module.exports = function(envType) {
           compact: IS_PROD
         }
       },
+      {
+        // i've added here the fonts extensions
+        // from your warnings, it may seem so that this will fix the problem
+        test: /\.(jpg|jpeg|png|gif|mp3|svg|ttf|woff2|woff|eot)$/,
+        loaders: ["file-loader"]
+      },
 
       // CSS Modules
       {
