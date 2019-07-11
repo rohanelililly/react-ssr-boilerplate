@@ -24,9 +24,10 @@ const ServerApp = ({ context, data, location }) => {
 
 export const renderServerSideApp = (req, res) => {
   console.log(req.headers['user-agent'])
-  Loadable.preloadAll()
-    .then(() => fetchDataForRender(ServerApp, req))
-    .then(data => renderApp(ServerApp, data, req, res));
+ // Loadable.preloadAll()
+  //  .then(() => fetchDataForRender(ServerApp, req))
+   // .then(data => renderApp(ServerApp, data, req, res));
+   renderApp(ServerApp, {}, req, res)
 };
 
 function renderApp(ServerApp, data, req, res) {

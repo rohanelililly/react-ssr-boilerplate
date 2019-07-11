@@ -1,5 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const { getAppEnv } = require('./env');
 
@@ -25,6 +27,11 @@ module.exports = {
     publicPath: PUBLIC_URL + '/',
     libraryTarget: 'commonjs2'
   },
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+  },
   module: {
     rules: [
       {
@@ -47,9 +54,10 @@ module.exports = {
         }
       },
       {
-        test: /\.s?css$/,
-        exclude: [resolvePath('../src/styles')],
+        test: /\.s?[ac]ss$/,
+        exclude: [resolvePath('../src/styles'),resolvePath('../assets')],
         use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -57,11 +65,18 @@ module.exports = {
               modules: true
             }
           },
+          'postcss-loader',
           'sass-loader',
           'import-glob-loader'
         ]
       }
     ]
   },
-  externals: [nodeExternals()]
+  externals: [nodeExternals()],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
 };
